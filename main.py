@@ -15,7 +15,9 @@ st.write("Logistic Regression models on SPY data (10 years).")
 
 # Step 1: Data Collection
 spy = yf.Ticker("SPY")
-data = spy.history(period="3y")
+# data = spy.history(period="3y")
+data = yf.download("SPY", period="3y")
+
 
 # data.columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'Dividends', 'Stock Splits']
 dataset = data[['Open', 'High', 'Low', 'Close', 'Volume']]
