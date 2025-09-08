@@ -1,6 +1,4 @@
-Of course. To generate that table, you can insert the following block of code into your existing script.
-A logical place to add this would be right after the "Final Consensus Signal" section and before the "SPY Backtest with Signals" chart. This new section will take the last 30 days from the validation set and display each model's prediction alongside the actual recorded outcome.
-Here is the complete, modified code. The new section is clearly marked.
+
 import numpy as np
 import pandas as pd
 import yfinance as yf
