@@ -134,36 +134,9 @@ else:
 st.subheader("📌 Final Consensus Signal")
 st.write(f"**{final_signal}**")
 
-
-# ---------------------------------------------------------------------------------
-# --------------------------- START: NEW TABLE SECTION ----------------------------
-# ---------------------------------------------------------------------------------
-
-st.subheader("🔍 Recent Performance (Last 30 Trading Days)")
-
-# Get the last 30 days from the validation set
-recent_df = validation_df.iloc[-30:].copy()
-recent_predictions1 = predictions1[-30:]
-recent_predictions2 = predictions2[-30:]
-
-# Create a DataFrame for display
-results_df = pd.DataFrame(index=recent_df.index)
-results_df['Actual Daily Change'] = (recent_df['Close'].pct_change() * 100).map('{:.2f}%'.format).fillna("N/A")
-results_df['Model 1 Pred (MA Cross)'] = pd.Series(recent_predictions1, index=recent_df.index).map(signal_map)
-results_df['Model 1 Actual'] = recent_df['Sign_1'].map(signal_map)
-results_df['Model 2 Pred (Daily)'] = pd.Series(recent_predictions2, index=recent_df.index).map(signal_map)
-results_df['Model 2 Actual'] = recent_df['Sign_2'].map(signal_map)
-
-# Reorder columns for clarity
-results_df = results_df[['Actual Daily Change', 'Model 2 Pred (Daily)', 'Model 2 Actual', 'Model 1 Pred (MA Cross)', 'Model 1 Actual']]
-
-# Display the table, sorting by date descending
-st.dataframe(results_df.sort_index(ascending=False))
-
-# ---------------------------------------------------------------------------------
-# ---------------------------- END: NEW TABLE SECTION -----------------------------
-# ---------------------------------------------------------------------------------
-
+# Data Reference
+st.subheader("Data Reference")
+st.write(f"This model uses SPY data from **{data.index.min().strftime('%Y-%m-%d')}** to **{data.index.max().strftime('%Y-%m-%d')}**.")
 
 # Step 8: Validation Backtest Chart with Signals
 st.subheader("📉 SPY Backtest with Signals")
@@ -238,5 +211,3 @@ ax3.set_ylabel('True Positive Rate')
 ax3.set_title('Receiver Operating Characteristic (Model 1)')
 ax3.legend(loc="lower right")
 st.pyplot(fig3)
-
-Can you remove the table with the last 30 days and just add a reference of the las day it took data and the day of the prediction?
